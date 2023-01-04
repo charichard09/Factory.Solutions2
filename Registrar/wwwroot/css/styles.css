@@ -6,13 +6,35 @@ body{
   background-color: #E4F9F5;
 }
 h1{
-  margin-top: 7%;
+  margin-top: 5%;
   margin-bottom: 7%;
   font-family: 'Major Mono Display', monospace;
   font-size: 4.625rem;
   font-weight: 600;
   color: #2DCAAD;
 }
+
+h2{
+  font-family: 'Major Mono Display', monospace;
+  font-weight: 500;
+  border-top-left-radius: 37px 140px;
+  border-top-right-radius: 23px 130px;
+  border-bottom-left-radius: 110px 19px;
+  border-bottom-right-radius: 120px 24px;
+  display: block;
+  position: relative;
+  border: solid 3px #6e7491;
+  padding: 40px 60px;
+  max-width: 800px;
+  width: 50%;
+  margin: 0 auto 0;
+  margin-bottom: 5%;
+  font-size: 37px;
+  line-height: 28px;
+  transform: rotate(-1deg);
+  box-shadow: 3px 15px 8px -10px rgba(0, 0, 0, 0.3);
+}
+
 ul{
   list-style: none;
 }
@@ -54,7 +76,7 @@ a:hover{
 
 .form-control{
   text-align: center;
-  width: 10%;
+  width: 13%;
   margin: auto;
   margin-top: 1%;
   margin-bottom: 1%;

@@ -6,6 +6,6 @@ namespace Registrar.Models
   {
     public int DepartmentId { get; set; }
     public string Name { get; set; }
-    public List<Department> Departments { get; set; }
+    public List<Course> Courses { get; set; }
   }
 }

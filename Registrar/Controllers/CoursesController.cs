@@ -30,9 +30,18 @@ namespace Registrar.Controllers
     [HttpPost]
     public ActionResult Create(Course course)
     {
+      if (!ModelState.IsValid)
+      {
+        // pass SelectList back to view to reinitiate dropdown form
+        ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "Name");
+        return View(course);
+      }
+      else
+      {
       _db.Courses.Add(course);
       _db.SaveChanges();
       return RedirectToAction("Index");
+      }
     }
 
     public ActionResult Details(int id, bool showForm)
@@ -44,7 +53,6 @@ namespace Registrar.Controllers
       ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "Name");
       ViewBag.showForm = showForm;
       return View(thisCourse);
-
     }
 
     [HttpPost, ActionName("Details")]
@@ -60,7 +68,8 @@ namespace Registrar.Controllers
         _db.SaveChanges();
       }
 
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new {id = course.CourseId, showForm = false});
+
     }
   }
 }

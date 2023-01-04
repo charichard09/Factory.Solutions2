@@ -6,10 +6,8 @@
 @model Registrar.Models.Student
 
 <h1>Student</h1>
-<ul>
-  <li>@Html.DisplayFor(model=>model.Name)</li>
-  <li>@Model.Date.ToShortDateString()</li>
-</ul>
+
+  <h2>@Html.DisplayFor(model=>model.Name) @Model.Date.ToShortDateString()</h2>
 
 @if (Model.JoinEntities.Count != 0)
 {
@@ -23,7 +21,7 @@
 }
 @if (ViewBag.showForm == false)
 {
-  @Html.ActionLink("Add A Course", "Details", new {showForm = true, id = Model.StudentId})
+  <p class="enlarge">@Html.ActionLink("Add A Course", "Details", new {showForm = true, id = Model.StudentId})</p>
 }
 
 @if (ViewBag.showForm == true)

@@ -6,7 +6,32 @@
 @model Registrar.Models.Course
 
 <h1>Course</h1>
-<ul>
-  <li>@Html.DisplayFor(model => model.Name)</li>
-  <li></li>
-</ul>
+  <h2>@Html.DisplayFor(model => model.Name)</h2>
+
+@if(Model.JoinEntities.Count != 0)
+{
+  <ul>
+  @foreach (CourseStudent join in Model.JoinEntities)
+  {
+    <li>@join.Student.Name</li>
+  }
+  </ul>
+  
+}
+@if(ViewBag.showForm == false)
+{
+  <p class="enlarge">@Html.ActionLink("Add A Student", "Details", new {showForm = true, id = Model.CourseId})</p>
+}
+
+@if (ViewBag.showForm == true)
+{
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.CourseId)
+    @Html.Label("Select Student")
+    @Html.DropDownList("StudentId")
+    <input type="submit" value="Add Student"/>
+  }
+}
+
+<p class="enlarge">@Html.ActionLink("Back to Courses", "Index", "Courses")</p>
