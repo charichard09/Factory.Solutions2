@@ -18,7 +18,7 @@ namespace Registrar.Controllers
     public ActionResult Index()
     {
       List<Student> model = _db.Students.ToList();
-      return View(model);
+      return View(model); //model passed to view is an object type of "List<Student>"
     }
 
     public ActionResult Create()
@@ -27,13 +27,17 @@ namespace Registrar.Controllers
     }
 
     [HttpPost]
-
     public ActionResult Create(Student student)
     {
       _db.Students.Add(student);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    
+
+    public ActionResult Details(int id)
+    { 
+      Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
+      return View(thisStudent);
+    }    
   }
 }
