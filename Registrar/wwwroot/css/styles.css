@@ -1,7 +1,9 @@
 body{
   text-align: center;
-  background: linear-gradient(#E4F9F5 95%, white);
-  backdrop-filter: blur(3px);
+  background-color: #E4F9F5;
+}
+#navbar{
+  background-color: #E4F9F5;
 }
 h1{
   margin-top: 7%;
@@ -13,4 +15,47 @@ h1{
 }
 ul{
   list-style: none;
+}
+li{
+  font-family: 'Major Mono Display', monospace;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: black;
+  padding-right: 4%;
+  padding-top: 2%;
+}
+p{
+  font-family: 'Major Mono Display', monospace;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: black;
+  padding-top: 2%;
+}
+a{
+  color: black;
+  font-weight: 400;
+}
+
+a:hover{
+  color: black;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.enlarge {
+  transition: transform .3s;
+  color: black;
+}
+
+.enlarge:hover {
+  transform: scale(1.1);
+  color: black;
+}
+
+.form-control{
+  text-align: center;
+  width: 10%;
+  margin: auto;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }

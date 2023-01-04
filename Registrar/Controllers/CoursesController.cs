@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Registrar.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Registrar.Controllers
 {
@@ -34,11 +35,32 @@ namespace Registrar.Controllers
       return RedirectToAction("Index");
     }
 
+    public ActionResult Details(int id, bool showForm)
+    {
+      Course thisCourse = _db.Courses
+                    .Include(course => course.JoinEntities)
+                    .ThenInclude(join => join.Student)
+                    .FirstOrDefault(course => course.CourseId == id);
+      ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "Name");
+      ViewBag.showForm = showForm;
+      return View(thisCourse);
 
+    }
 
+    [HttpPost, ActionName("Details")]
+    public ActionResult AddStudent(int studentId, Course course)
+    {
+      #nullable enable
+      CourseStudent? joinEntity = _db.JoinEntities.FirstOrDefault(join => (join.CourseId == course.CourseId && join.StudentId == studentId));
+      #nullable disable
 
+      if(joinEntity == null && studentId != 0)
+      {
+        _db.JoinEntities.Add(new CourseStudent() { CourseId = course.CourseId, StudentId = studentId });
+        _db.SaveChanges();
+      }
 
-
-    
+      return RedirectToAction("Index");
+    }
   }
 }

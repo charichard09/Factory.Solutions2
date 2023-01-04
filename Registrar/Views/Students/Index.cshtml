@@ -15,12 +15,12 @@ else
     @* add | @Student.Department.Name *@
     @foreach(Student student in Model)
     {
-      <li>
-        @Html.ActionLink($"{student.Name}", "Details", new { id = student.StudentId }) 
+      <li class="enlarge">
+        @Html.ActionLink($"{student.Name}", "Details", new { id = student.StudentId, showForm = false}) 
       </li>
     }
   </ul>
 }
 
-<p>@Html.ActionLink("Add a new student", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p class="enlarge">@Html.ActionLink("Add a new student", "Create")</p>
+<p class="enlarge">@Html.ActionLink("Home", "Index", "Home")</p>

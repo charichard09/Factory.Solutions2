@@ -14,10 +14,10 @@
 <ul>
   @foreach (Course course in Model)
   {
-    <li>@Html.ActionLink($"{course.Name}", "Details", new { id = course.CourseId })</li>
+    <li class="enlarge">@Html.ActionLink($"{course.Name}", "Details", new { id = course.CourseId, showForm = false })</li>
   }
 </ul>
 
-<p>@Html.ActionLink("Add new course","Create")</p>
-<p>@Html.ActionLink("Add new student","Create", "Students")</p>
-<p>@Html.ActionLink("Home","Index", "Home")</p>
+<p class="enlarge">@Html.ActionLink("Add new course", "Create")</p>
+<p class="enlarge">@Html.ActionLink("Add new student","Create", "Students")</p>
+<p class="enlarge">@Html.ActionLink("Home","Index", "Home")</p>

@@ -3,3 +3,36 @@
 }
 
 @using Registrar.Models
+@model Registrar.Models.Student
+
+<h1>Student</h1>
+<ul>
+  <li>@Html.DisplayFor(model=>model.Name)</li>
+  <li>@Model.Date.ToShortDateString()</li>
+</ul>
+
+@if (Model.JoinEntities.Count != 0)
+{
+  <ul>
+  @foreach (CourseStudent join in Model.JoinEntities)
+  {
+    <li>@join.Course.Name</li>
+  }
+  </ul>
+
+}
+@if (ViewBag.showForm == false)
+{
+  @Html.ActionLink("Add A Course", "Details", new {showForm = true, id = Model.StudentId})
+}
+
+@if (ViewBag.showForm == true)
+{  
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.StudentId)
+    @Html.Label("Select Course")
+    @Html.DropDownList("CourseId")    
+    <input type="submit" value="Add Course"/>
+  }
+}
