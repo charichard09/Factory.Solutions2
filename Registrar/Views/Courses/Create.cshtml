@@ -3,6 +3,7 @@
 }
 
 @model Registrar.Models.Course
+@using Registrar.Models
 
 
 <h1>Create Course</h1>
@@ -11,6 +12,7 @@
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
   <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</p>
+  @Html.LabelFor(model => model.Department)
   @Html.DropDownList("DepartmentId")
   <p>@Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })</p>    
 

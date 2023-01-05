@@ -1,0 +1,42 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Registrar.Models
+@using System.Collections.Generic
+@model Registrar.Models.Department
+
+<h2>Department</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+@if (@Model.Courses.Count == 0)
+{
+  <h3>There are currently no courses in @Html.DisplayFor(model => model.Name)</h3>
+}
+else
+{
+  <h3>Current Courses Available:</h3>
+  <ul>
+    @foreach (Course course in @Model.Courses)
+    {
+      string students = "";
+      if (course.JoinEntities.Count == 0)
+      {
+        students = "There are no students currently enrolled in this course.";
+      }
+      else
+      {
+        List<string> studentList = new List<string>();
+        @foreach(CourseStudent join in course.JoinEntities)
+        {
+          studentList.Add(join.Student.Name);
+        }
+        students = String.Join(", ", studentList);
+      }
+      <li>
+        @course.Name | Students: @students
+      </li>
+    }
+  </ul>
+}

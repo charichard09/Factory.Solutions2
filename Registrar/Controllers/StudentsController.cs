@@ -66,5 +66,22 @@ namespace Registrar.Controllers
 
       return RedirectToAction("Index");
     }
+
+    public ActionResult Edit(int id, bool changeName, bool changeDate)
+    {
+      Student thisStudent = _db.Students.FirstOrDefault(s => s.StudentId == id);
+      ViewBag.ChangeName = changeName;
+      ViewBag.ChangeDate = changeDate;
+      return View (thisStudent);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Student student)
+    {
+      _db.Students.Update(student);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = student.StudentId});
+
+    }
   }
 }

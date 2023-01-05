@@ -29,10 +29,23 @@ namespace Registrar.Controllers
     [HttpPost]
     public ActionResult Create(Department department)
     {
+      if (!ModelState.IsValid)
+      {
+        return View(department);
+      }
       _db.Departments.Add(department);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
     
+    public ActionResult Details(int id)
+    {
+      Department thisDepartment = _db.Departments
+        .Include(department => department.Courses)
+        .ThenInclude(course => course.JoinEntities)
+        .ThenInclude(join => join.Student)
+        .FirstOrDefault(department => department.DepartmentId == id);
+      return View(thisDepartment);
+    }
   }
 }

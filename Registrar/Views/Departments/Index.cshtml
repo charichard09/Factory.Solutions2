@@ -13,8 +13,9 @@
 <ul>
   @foreach (Department department in Model)
   {
-    <li class="enlarge">@Html.ActionLink($"{department.Name}", "Details", new { id = department.DepartmentId, showForm = false })</li>
+    <li class="enlarge">@Html.ActionLink($"{department.Name}", "Details", new { id = department.DepartmentId})</li>
   }
 </ul>
 
 <p class="enlarge">@Html.ActionLink("Add new department", "Create")</p>
+<p class="enlarge">@Html.ActionLink("Home", "Index", "Home")</p>
