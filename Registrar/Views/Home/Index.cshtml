@@ -6,3 +6,11 @@
 <p class="enlarge">@Html.ActionLink("See all students", "Index", "Students")</p>
 <p class="enlarge">@Html.ActionLink("See all courses", "Index", "Courses")</p>
 <p class="enlarge">@Html.ActionLink("See all departments", "Index", "Departments")</p>
+
+@* search bar *@
+<p>Search for a student</p>
+@using (Html.BeginForm("Search", "Home", FormMethod.Get))
+{
+  @Html.TextBox("query", "", new { @class = "form-control" })
+  <input type="submit" value="Search">
+}

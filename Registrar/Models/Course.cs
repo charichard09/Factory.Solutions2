@@ -8,8 +8,9 @@ namespace Registrar.Models
     public int CourseId { get; set; }
     [Required(ErrorMessage = "Please enter a course name.")]
     public string Name { get; set; }
-    // public int DepartmentId { get; set; }
-    // public Department Department { get; set; }
+    [Required(ErrorMessage = "Please choose a department")]
+    public int DepartmentId { get; set; }
+    public Department Department { get; set; }
     public List<CourseStudent> JoinEntities { get; }
   }
 }

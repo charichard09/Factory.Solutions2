@@ -11,6 +11,9 @@
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
   <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</p>
+  @Html.DropDownList("DepartmentId")
+  <p>@Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })</p>    
+
   <input type="submit" value="Add new course"/>
 }
 

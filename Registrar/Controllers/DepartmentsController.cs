@@ -20,6 +20,19 @@ namespace Registrar.Controllers
       List<Department> model = _db.Departments.ToList();
       return View(model);
     }
+
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Department department)
+    {
+      _db.Departments.Add(department);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
     
   }
 }

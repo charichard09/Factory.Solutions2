@@ -24,6 +24,7 @@ namespace Registrar.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Department");
       return View();
     }
 
@@ -33,7 +34,7 @@ namespace Registrar.Controllers
       if (!ModelState.IsValid)
       {
         // pass SelectList back to view to reinitiate dropdown form
-        ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "Name");
+        ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Department");
         return View(course);
       }
       else
