@@ -64,7 +64,7 @@ namespace Registrar.Controllers
         _db.SaveChanges();
       }
 
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new {id = student.StudentId, showForm = false});
     }
 
     public ActionResult Edit(int id, bool changeName, bool changeDate)
@@ -82,6 +82,31 @@ namespace Registrar.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new {id = student.StudentId});
 
+    }
+
+    public ActionResult Delete(int id)
+    {
+      Student thisStudent = _db.Students.FirstOrDefault(s => s.StudentId == id);
+      return View(thisStudent);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirm(int id)
+    {
+      Student thisStudent = _db.Students.FirstOrDefault(s => s.StudentId == id);
+      _db.Students.Remove(thisStudent);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult DropCourse(int sId, int cId)
+    {
+      CourseStudent thisJoin = _db.JoinEntities
+                                  .FirstOrDefault(join => (join.StudentId == sId && join.CourseId == cId));
+      _db.JoinEntities.Remove(thisJoin);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = sId, showForm = false});
     }
   }
 }

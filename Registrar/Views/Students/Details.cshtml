@@ -14,14 +14,25 @@
   <ul>
   @foreach (CourseStudent join in Model.JoinEntities)
   {
-    <li>@join.Course.Name</li>
+    //working here--------------
+    <div class="row">
+        <div class="col-6">
+          <li class="enlarge">@join.Course.Name</li>
+        </div>
+        <div class="col-6">
+          <li class="enlarge">
+            @using (Html.BeginForm("DropCourse", "Students"))
+            {
+              <button type="submit">Drop Course</button>
+              @Html.Hidden("sId", @Model.StudentId)
+              @Html.Hidden("cId", join.CourseId)
+            }
+          </li>
+        </div>
+      </div>
   }
   </ul>
 
-}
-@if (ViewBag.showForm == false)
-{
-  <p class="enlarge">@Html.ActionLink("Add A Course", "Details", new {showForm = true, id = Model.StudentId})</p>
 }
 
 @if (ViewBag.showForm == true)
@@ -35,4 +46,17 @@
   }
 }
 
-<p>@Html.ActionLink("Edit Student Info", "Edit", new {id = Model.StudentId, changeName = false, changeDate = false})</p>
+<ul>
+
+  @if (ViewBag.showForm == false)
+  {
+    <li class="enlarge">@Html.ActionLink("Add A Course", "Details", new {showForm = true, id = Model.StudentId})</li>
+  }
+
+  <li class="enlarge">@Html.ActionLink("Edit Student Info", "Edit", new {id = Model.StudentId, changeName = false, changeDate = false})</li>
+
+  <li class="enlarge">@Html.ActionLink("Unenroll Student", "Delete", new {id = Model.StudentId}, new { @style = "color: blue; font-size: small; text-align: right;"})</li>
+
+</ul>
+
+

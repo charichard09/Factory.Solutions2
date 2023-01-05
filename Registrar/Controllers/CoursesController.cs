@@ -71,7 +71,53 @@ namespace Registrar.Controllers
       }
 
       return RedirectToAction("Details", new {id = course.CourseId, showForm = false});
+    }
 
+    public ActionResult Edit(int id)
+    {
+      Course thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+      ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Name");
+      return View(thisCourse);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Course course)
+    {
+      if (!ModelState.IsValid)
+      {
+        ViewBag.DepartmentId = new SelectList(_db.Departments, "departmentId", "Name");
+        return View(course);
+      }
+      else
+      {
+        _db.Courses.Update(course);
+        _db.SaveChanges();
+        return RedirectToAction("Details", new { id = course.CourseId });
+      }
+    }
+
+    public ActionResult Delete(int id)
+    {
+      Course thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+      return View(thisCourse);
+    }
+
+    [HttpPost, ActionName ("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Course thisCourse = _db.Courses.FirstOrDefault(courses => courses.CourseId == id);
+      _db.Courses.Remove(thisCourse);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult DeleteJoin(int joinId)
+    {
+      CourseStudent joinEntry = _db.JoinEntities.FirstOrDefault(join => join.CourseStudentId == joinId);
+      _db.JoinEntities.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = joinEntry.CourseId, showForm = false });
     }
   }
 }

@@ -13,7 +13,21 @@
   <ul>
   @foreach (CourseStudent join in Model.JoinEntities)
   {
-    <li>@join.Student.Name</li>
+    
+    <div class="row">
+      <div class="col-6">
+        <li class="enlarge">@join.Student.Name</li>
+      </div>
+      <div class="col-6">
+        <li class="enlarge">
+          @using (Html.BeginForm("DeleteJoin", "Courses"))
+          {
+            <button type="submit">Drop student</button>
+            @Html.Hidden("joinId", @join.CourseStudentId)
+          }
+        </li>
+      </div>
+    </div>
   }
   </ul>
   
@@ -34,4 +48,6 @@
   }
 }
 
+<p class="enlarge">@Html.ActionLink("Edit Course Info", "Edit", new { id = @Model.CourseId })</p>
+<p class="enlarge">@Html.ActionLink("Delete Course", "Delete", new { id = @Model.CourseId })</p>
 <p class="enlarge">@Html.ActionLink("Back to Courses", "Index", "Courses")</p>

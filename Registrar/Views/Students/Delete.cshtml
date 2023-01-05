@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Registrar.Models.Student
+@using Registrar.Models
+
+<h2>Are you sure you'd like unenroll @Model.Name from the University </h2>
+
+@Html.DisplayNameFor(model => model.Name) : @Html.DisplayFor(model => model.Name)
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete" />
+  @Html.ActionLink("Go Back", "Index")
+}

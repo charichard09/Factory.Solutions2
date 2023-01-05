@@ -15,9 +15,18 @@ else
     @* add | @Student.Department.Name *@
     @foreach(Student student in Model)
     {
-      <li class="enlarge">
-        @Html.ActionLink($"{student.Name}", "Details", new { id = student.StudentId, showForm = false}) 
-      </li>
+      <div class="row">
+        <div class="col-6">
+          <li class="enlarge">
+          @Html.ActionLink($"{student.Name}", "Details", new { id = student.StudentId, showForm = false})
+          </li>
+        </div>
+        <div class="col-6">
+          <li class="enlarge">
+            @Html.ActionLink("Unenroll Student", "Delete", new {id = student.StudentId}, new { @style = "color: blue; font-size: small; text-align: right;"})
+          </li>
+        </div>
+      </div>
     }
   </ul>
 }

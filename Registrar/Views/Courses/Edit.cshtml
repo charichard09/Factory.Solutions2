@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Registrar.Models
+@model Registrar.Models.Course
+
+<p>@Model.Name</p><br>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.CourseId)
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+  <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</p>
+
+  @Html.LabelFor(model => model.Department)
+  @Html.DropDownList("DepartmentId")
+  <p>@Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })</p>  
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+}
